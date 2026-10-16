@@ -1,0 +1,12 @@
+{
+  "name": "nyoni-personal-preview-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NYONI Personal Preview Lab: one approved suit, three fabrics, optional See it on me flow with a real job contract and no paid provider connected.",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": { "node": ">=20" }
+}

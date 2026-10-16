@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NYONI Preview Lab</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <span class="brand">NYONI</span>
+    <span class="lab">Personal Preview Lab · proof build</span>
+    <span id="draft-note" class="muted" aria-live="polite"></span>
+  </header>
+
+  <main class="layout">
+    <section class="stage" aria-label="Preview">
+      <div class="view-tabs" role="tablist" aria-label="Preview view">
+        <button role="tab" id="tab-studio" aria-selected="true" data-view="studio">Studio</button>
+        <button role="tab" id="tab-original" aria-selected="false" data-view="original" hidden>Original</button>
+        <button role="tab" id="tab-personal" aria-selected="false" data-view="personal" hidden>Personal preview</button>
+        <button role="tab" id="tab-details" aria-selected="false" data-view="details">Garment details</button>
+      </div>
+      <div class="frame">
+        <div id="view-studio" class="view"></div>
+        <div id="view-original" class="view" hidden><img id="original-img" alt="Your uploaded photo"></div>
+        <div id="view-personal" class="view" hidden>
+          <div id="stale-banner" class="banner" hidden>Previous design — <button class="link" id="update-preview">update preview</button></div>
+          <img id="personal-img" alt="Personal preview of your previous design">
+        </div>
+        <div id="view-details" class="view details-view" hidden></div>
+      </div>
+      <p class="disclaimer">Studio image is an illustrative diagram of the recorded specification, not a photograph of the cloth. Fabric attributes and garment construction await tailor and supplier approval.</p>
+    </section>
+
+    <section class="panel" aria-label="Design">
+      <nav class="steps" aria-label="Steps">
+        <button data-step="cloth" aria-current="step">Cloth</button>
+        <button data-step="details">Details</button>
+        <button data-step="me">See it on me</button>
+        <button data-step="review">Review</button>
+      </nav>
+
+      <div class="step" id="step-cloth">
+        <h2>Choose cloth</h2>
+        <p class="muted">Three proof fabrics. Supplier IDs, composition, weight and price are shown only once verified.</p>
+        <div id="fabric-list" class="cards" role="radiogroup" aria-label="Fabric"></div>
+      </div>
+
+      <div class="step" id="step-details" hidden>
+        <h2>Details</h2>
+        <fieldset><legend>Lapel</legend><div id="opt-lapel" class="cards" role="radiogroup" aria-label="Lapel"></div></fieldset>
+        <fieldset><legend>Buttons</legend><div id="opt-button" class="chips" role="radiogroup" aria-label="Buttons"></div></fieldset>
+        <fieldset><legend>Lining</legend><div id="opt-lining" class="chips" role="radiogroup" aria-label="Lining"></div></fieldset>
+        <fieldset><legend>Monogram <span class="muted">(optional, up to 3 letters, inside jacket)</span></legend>
+          <input id="monogram" maxlength="3" autocomplete="off" pattern="[A-Za-z]{0,3}" aria-describedby="mono-err"><span id="mono-err" class="error" aria-live="polite"></span>
+        </fieldset>
+      </div>
+
+      <div class="step" id="step-me" hidden>
+        <h2>See it on me</h2>
+        <div id="me-body"></div>
+      </div>
+
+      <div class="step" id="step-review" hidden>
+        <h2>Review and request</h2>
+        <dl id="summary" class="summary"></dl>
+        <p class="muted">The personal preview, if any, is a visual aid only. It is not sent with your request and does not establish size or fit.</p>
+        <form id="request-form" novalidate>
+          <h3>Request a fitting / design review</h3>
+          <label>Name <input name="name" required autocomplete="name"></label>
+          <label>Email or phone <input name="contact" required autocomplete="email"></label>
+          <label>Occasion <span class="muted">(optional)</span> <input name="occasion"></label>
+          <label>Event date <span class="muted">(optional; not a delivery promise)</span> <input name="eventDate" type="date"></label>
+          <label>Notes <span class="muted">(optional)</span> <textarea name="notes" rows="3"></textarea></label>
+          <button class="primary" type="submit">Send request</button>
+          <div id="request-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <h2 id="confirm-title">Check this combination</h2>
+    <p id="confirm-text"></p>
+    <div class="row"><button id="confirm-cancel">Cancel</button><button id="confirm-apply" class="primary">Apply</button></div>
+  </dialog>
+
+  <div id="sr-status" class="sr-only" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
